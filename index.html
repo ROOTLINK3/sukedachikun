@@ -212,7 +212,7 @@
         <p>顧客からのヒアリングシートを、複数の申請様式や付属書類へ何度も手入力する毎日——。その重複作業とチェックの手間、貴事務所専用のAI自動化ラインで一新しませんか。</p>
         <div class="hero-cta">
           <a href="#poc" class="btn gold">▶ 10秒で無料デモ（PoC）を試す</a>
-          <a href="#ask" class="btn outline">無料診断・お見積もり</a>
+          <a href="#ask" class="btn outline">お見積もり・ご相談</a>
         </div>
       </div>
       <div class="hero-mascot">
@@ -355,17 +355,17 @@
       </div>
     </div>
     <div style="text-align:center; margin-top:32px;">
-      <a href="#ask" class="btn gold">▶ 無料診断・お見積もりに進む</a>
+      <a href="#ask" class="btn gold">▶ お見積もり・ご相談に進む</a>
     </div>
   </section>
   <!-- ASK / フォーム -->
   <section class="reveal" id="ask">
-    <div class="eyebrow" style="text-align:center;">無料相談・診断</div>
+    <div class="eyebrow" style="text-align:center;">お見積もり・ご相談</div>
     <h2 class="section-title">あなたの様式での自動化・見積もり相談</h2>
     <p class="section-sub">「うちで使っている申請書も自動化できる？」「どれくらい削減できる？」などお気軽にご相談ください。</p>
     <div class="ask-panel">
       <div class="type-toggle">
-        <div class="type-btn active" data-type="quote" onclick="selectType(this,'quote')">無料自動化診断・見積</div>
+        <div class="type-btn active" data-type="quote" onclick="selectType(this,'quote')">お見積もり</div>
         <div class="type-btn" data-type="question" onclick="selectType(this,'question')">質問・相談</div>
       </div>
       <label>事務所名・会社名</label>
@@ -399,7 +399,7 @@
       </div>
 
 
-      <button class="btn gold" id="ask-submit-btn" style="margin-top:22px; width:100%; font-size:15px; padding:16px;" onclick="submitAskForm()">無料自動化診断を依頼する</button>
+      <button class="btn gold" id="ask-submit-btn" style="margin-top:22px; width:100%; font-size:15px; padding:16px;" onclick="submitAskForm()">お見積もりを依頼する</button>
       <div id="ask-status" style="margin-top:12px; font-family:var(--mono); font-size:12px; color:#8C8371; text-align:center;"></div>
     </div>
   </section>
@@ -410,7 +410,7 @@
     <div class="faq-list">
       <details class="faq-item">
         <summary>料金はどのくらいかかりますか？</summary>
-        <p>初回のカスタマイズ設計費（貴事務所の業務・様式に合わせた構築費）と、月額の運用サポート費（生成件数に応じた従量部分を含みます）の2本立てです。具体的な金額は業務内容により異なるため、まずは無料診断でお見積もりします。</p>
+        <p>初回のカスタマイズ設計費（貴事務所の業務・様式に合わせた構築費）と、月額の運用サポート費（生成件数に応じた従量部分を含みます）の2本立てです。具体的な金額は業務内容により異なるため、まずはお見積もりをご依頼ください。</p>
       </details>
       <details class="faq-item">
         <summary>導入までどれくらいの期間がかかりますか？</summary>
@@ -535,7 +535,8 @@
   function submitAskForm(){
     const statusEl = document.getElementById('ask-status');
     const activeBtn = document.querySelector('.type-toggle .type-btn.active');
-    const type = activeBtn ? activeBtn.textContent : '無料自動化診断';
+    // GAS側は種類の文字で受け分けているため、画面の表示を変えても送る値は従来のままにする
+    const type = activeBtn ? (activeBtn.dataset.type === 'quote' ? '無料自動化診断・見積' : activeBtn.textContent) : '無料自動化診断';
     const askType = activeBtn ? activeBtn.dataset.type : 'quote';
     const company = document.getElementById('ask-company').value.trim();
     const contactName = document.getElementById('ask-contact').value.trim();
@@ -580,7 +581,7 @@
     const blockMap = { quote:'ask-block-quote', question:'ask-block-question' };
     document.getElementById(blockMap[type]).style.display = 'block';
     const btn = document.getElementById('ask-submit-btn');
-    btn.textContent = type === 'quote' ? '無料自動化診断を依頼する' : '質問を送る';
+    btn.textContent = type === 'quote' ? 'お見積もりを依頼する' : '質問を送る';
   }
 </script>
 </body>
