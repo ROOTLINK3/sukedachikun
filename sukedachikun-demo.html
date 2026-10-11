@@ -433,7 +433,7 @@ function buildCaseXmlClient(c){
   return lines.join('\n');
 }
 async function generateYoshiki1Pdf(caseId){
-  if(!API_URL){ alert('バックエンド未接続のため、様式第一号PDF生成はデモモードでは利用できません。'); return; }
+  if(!API_URL){ alert('デモではこの機能はお試しいただけません。'); return; }
   const btn = document.getElementById('detail-yoshiki1-btn');
   const original = btn.textContent;
   btn.disabled = true;
@@ -579,7 +579,7 @@ function renderDashboard(){
   document.getElementById('template-count').textContent = Object.keys(templates).length;
   document.getElementById('template-names').textContent = Object.values(templates).map(t=>t.name).join('、');
   const statusEl = document.getElementById('api-status');
-  statusEl.textContent = API_URL ? `● 接続中（Google スプレッドシートに保存されます）` : `○ デモモード（このブラウザを閉じるとデータは消えます。API_URLを設定すると永続化されます）`;
+  statusEl.textContent = API_URL ? `● 接続中（Google スプレッドシートに保存されます）` : `○ デモ（サンプルデータで表示しています。ブラウザを閉じると入力内容は消えます）`;
   renderFormatAlert();
   renderRenewalAlert();
 }
@@ -746,7 +746,7 @@ function goAiAssist(){
 }
 async function renderAiAssistHistory(){
   const wrap = document.getElementById('ai-history');
-  if(!API_URL){ wrap.innerHTML = '<p class="field-note">バックエンド未接続のため、履歴はデモモードでは利用できません。</p>'; return; }
+  if(!API_URL){ wrap.innerHTML = '<p class="field-note">デモではこの機能はお試しいただけません。</p>'; return; }
   wrap.innerHTML = '<p class="field-note">読み込み中…</p>';
   try{
     const [summaryRes, draftRes] = await Promise.all([
@@ -770,7 +770,7 @@ async function renderAiAssistHistory(){
   }
 }
 async function runSummarize(){
-  if(!API_URL){ alert('バックエンド未接続のため、要約機能はデモモードでは利用できません。API_URLを設定してください。'); return; }
+  if(!API_URL){ alert('デモではこの機能はお試しいただけません。'); return; }
   const subject = document.getElementById('ai-subject').value.trim();
   const content = document.getElementById('ai-content').value.trim();
   if(!content){ alert('要約したい法律改正文書の本文を入力してください。'); return; }
@@ -788,7 +788,7 @@ async function runSummarize(){
   }
 }
 async function runDraft(){
-  if(!API_URL){ alert('バックエンド未接続のため、申請書素案の作成はデモモードでは利用できません。API_URLを設定してください。'); return; }
+  if(!API_URL){ alert('デモではこの機能はお試しいただけません。'); return; }
   const subject = document.getElementById('ai-subject').value.trim();
   if(!subject){ alert('件名（作成したい文書・申請の種類）を入力してください。'); return; }
   const content = document.getElementById('ai-content').value.trim();
